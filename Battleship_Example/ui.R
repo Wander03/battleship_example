@@ -1,5 +1,5 @@
 ui <- fluidPage(
-  titlePanel("Battleship Simulation"),
+  titlePanel("Battleship Simulation & Game"),
   
   sidebarLayout(
     sidebarPanel(
@@ -20,7 +20,17 @@ ui <- fluidPage(
                                "Shots to First Hit" = "shotsToFirstHit"),
                    inline = TRUE),
       
+      radioButtons("modeToggle", "Choose Mode:",
+                   choices = c("Simulation" = "simulate", "Play Game" = "play"),
+                   inline = TRUE),
+      
       checkboxInput("showTable", "Show Table", value = FALSE),
+      
+      conditionalPanel(
+        condition = "input.modeToggle == 'play'",
+        actionButton("resetBoard", "Reset Board")
+      ),
+      
       # Spacer and "Created by" link
       tags$div(
         style = "margin-top: 20px; text-align: left; font-size: 12px;",
@@ -32,7 +42,7 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      plotOutput("gridPlot", height = 400, width = 600),
+      plotOutput("gridPlot", height = 400, width = 600, click = "grid_click"),
       conditionalPanel(
         condition = "input.showTable == true",
         dataTableOutput("simulationTable")
