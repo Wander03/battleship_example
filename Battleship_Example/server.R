@@ -7,8 +7,17 @@ server <- function(input, output, session) {
   
   # Function to validate simulation inputs
   validateInputs <- function() {
-    if (input$numShips > input$gridSize^2) {
+    if (input$numShips < 1 || input$gridSize < 1 || input$numSimulations < 1) {
+      showNotification("Error: Are you trying to break the app!?! Keep the all your numbers positive!", type = "error", duration = 5)
+      return(FALSE)
+    } else if (input$numShips > input$gridSize^2) {
       showNotification("Error: Number of ships exceeds total grid cells!", type = "error", duration = 5)
+      return(FALSE)
+    } else if (input$gridSize > 20) {
+      showNotification("Error: Please keep grid size 20 or below!", type = "error", duration = 5)
+      return(FALSE)
+    } else if (input$numSimulations > 10000) {
+      showNotification("Error: Please keep simulation count below 10,000!", type = "error", duration = 5)
       return(FALSE)
     }
     TRUE

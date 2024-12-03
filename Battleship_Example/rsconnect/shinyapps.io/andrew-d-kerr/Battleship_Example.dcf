@@ -5,7 +5,7 @@ account: andrew-d-kerr
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 13356927
-bundleId: 9371406
+bundleId: 9453733
 url: https://andrew-d-kerr.shinyapps.io/Battleship_Example/
 version: 1
 asMultiple: FALSE
